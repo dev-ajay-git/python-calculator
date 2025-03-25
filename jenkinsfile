@@ -25,6 +25,11 @@ stage('Package Application') {
                 sh '${PYTHON}/bin/python3 -m build'
             }
         }
+stage('SonarQube Analysis') {
+            steps {
+                sh '/opt/sonar-scanner/bin/sonar-scanner'
+            }
+        }
     }
 
 }
