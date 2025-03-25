@@ -26,13 +26,10 @@ stage('Package Application') {
             }
         }
 stage('SonarQube Analysis') {
-    environment {
-        SONAR_TOKEN = 'sqa_7ea9455d1573f1875d918cc9b6d4e9c803083f6a'  // Replace with your actual SonarQube token
-    }
-    steps {
-        sh '/opt/sonar-scanner/bin/sonar-scanner -Dsonar.login=$SONAR_TOKEN'
-    }
-}
+            steps {
+                sh '/opt/sonar-scanner/bin/sonar-scanner'
+            }
+        }
     }
 
 }
