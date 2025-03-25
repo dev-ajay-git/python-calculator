@@ -30,8 +30,7 @@ stage('SonarQube Analysis') {
                 sh '/opt/sonar-scanner/bin/sonar-scanner'
             }
         }
-stage('Upload to Nexus') {
-    steps {
+
         stage('Upload to Nexus') {
     steps {
         sh '''
