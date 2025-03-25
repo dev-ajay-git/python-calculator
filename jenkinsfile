@@ -37,9 +37,9 @@ stage('SonarQube Analysis') {
             steps {
                 // Upload the package to Nexus using Twine, passing credentials securely
                 sh """
-                    python3 -m twine upload --repository-url http://13.127.145.84:8081/repository/python-calculator/ \
-                    --username \$TWINE_USERNAME --password \$TWINE_PASSWORD dist/*
-                """
+            python3 -m twine upload --verbose --repository-url http://13.127.145.84:8081/repository/python-calculator/ \
+            --username $TWINE_USERNAME --password $TWINE_PASSWORD dist/*
+        """
     
     }
 }
