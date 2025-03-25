@@ -30,6 +30,14 @@ stage('SonarQube Analysis') {
                 sh '/opt/sonar-scanner/bin/sonar-scanner'
             }
         }
+stage('Upload to Nexus') {
+    steps {
+        sh '''
+        ${PYTHON}/bin/python3 -m pip install --upgrade twine
+        ${PYTHON}/bin/python3 -m twine upload --repository nexus dist/*
+        '''
+    }
+}
     }
 
 }
