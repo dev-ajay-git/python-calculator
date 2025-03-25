@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        TWINE_USERNAME = credentials('nexus')  // Use your credentials ID 'nexus'
-        TWINE_PASSWORD = credentials('nexus')  // Use your credentials ID 'nexus'
+        TWINE_USERNAME = credentials('NEXUS')  // Use your credentials ID 'nexus'
+        TWINE_PASSWORD = credentials('NEXUS')  // Use your credentials ID 'nexus'
         PYTHON = tool name: 'python3'
     }
     stages {
