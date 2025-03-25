@@ -1,5 +1,6 @@
+from src.calculator import Calculator  # Update import to match the directory structure
+
 import unittest
-from calculator import Calculator
 
 class TestCalculator(unittest.TestCase):
     
