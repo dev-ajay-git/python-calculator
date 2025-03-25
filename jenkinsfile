@@ -1,6 +1,8 @@
 pipeline {
     agent any
     environment {
+TWINE_USERNAME = credentials('nexus')  // Replace with your credentials ID
+        TWINE_PASSWORD = credentials('nexus')  // Replace with your credentials ID
         PYTHON = tool name: 'python3'
     }
     stages {
@@ -32,10 +34,10 @@ stage('SonarQube Analysis') {
         }
 stage('Upload to Nexus') {
     steps {
-        sh '''
-        ${PYTHON}/bin/python3 -m pip install --upgrade twine
-        ${PYTHON}/bin/python3 -m twine upload --repository nexus dist/*
-        '''
+        sh """
+                    python3 -m twine upload --repository-url http://13.127.145.84:8081/repository/python-calculator/ \
+                    --username $TWINE_USERNAME --password $TWINE_PASSWORD dist/*
+                    """
     }
 }
     }
