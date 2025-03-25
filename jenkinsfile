@@ -19,6 +19,12 @@ stage('Run Tests') {
                 sh '${PYTHON}/usr/bin/python3 -m pytest tests/'
             }
         }
+stage('Package Application') {
+            steps {
+                sh '${PYTHON}/bin/python3 -m pip install --upgrade build'
+                sh '${PYTHON}/bin/python3 -m build'
+            }
+        }
     }
 
 }
