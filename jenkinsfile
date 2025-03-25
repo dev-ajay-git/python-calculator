@@ -33,10 +33,11 @@ stage('SonarQube Analysis') {
             }
         }
 
-      stage('Upload to Nexus') {
+ stage('Upload to Nexus') {
             steps {
-                // Upload the package to Nexus using Twine, passing credentials securely
-        sh """
+                // Securely bind credentials using Jenkins' built-in functionality
+                withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'TWINE_USERNAME', passwordVariable: 'TWINE_PASSWORD')]) {
+                    sh """
                         python3 -m twine upload --verbose --repository-url http://13.127.145.84:8081/repository/python-calculator/ \
                         --username $TWINE_USERNAME --password $TWINE_PASSWORD dist/*
                     """
