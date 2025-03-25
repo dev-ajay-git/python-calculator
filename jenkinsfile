@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
- TWINE_USERNAME = credentials('NEXUS')  // Use your credentials ID 'nexus'
+        TWINE_USERNAME = credentials('NEXUS')  // Use your credentials ID 'nexus'
         TWINE_PASSWORD = credentials('NEXUS')  // Use your credentials ID 'nexus'
         PYTHON = tool name: 'python3'
     }
@@ -11,29 +11,27 @@ pipeline {
                 git 'https://github.com/dev-ajay-git/python-calculator.git'
             }
         }
-  stage('Install Dependencies') {
+        stage('Install Dependencies') {
             steps {
                 sh '${PYTHON}/usr/bin/python3 -m pip install -r requirements.txt'
             }
         }
-stage('Run Tests') {
+        stage('Run Tests') {
             steps {
                 sh '${PYTHON}/usr/bin/python3 -m pytest tests/'
             }
         }
-stage('Package Application') {
+        stage('Package Application') {
             steps {
                 sh '${PYTHON}/bin/python3 -m pip install --upgrade build'
                 sh '${PYTHON}/bin/python3 -m build'
             }
         }
-stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 sh '/opt/sonar-scanner/bin/sonar-scanner'
             }
         }
-
- stages {
         stage('Upload to Nexus') {
             steps {
                 sh """
@@ -41,9 +39,7 @@ stage('SonarQube Analysis') {
                     --repository-url http://13.127.145.84:8081/repository/python-calculator/ \
                     --username $TWINE_USERNAME --password $TWINE_PASSWORD dist/*
                 """
+            }
+        }
     }
-}
-}
-    }
-
 }
